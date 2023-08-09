@@ -54,7 +54,7 @@ struct fscrypt_policy_v1 {
  */
 #define FSCRYPT_KEY_DESC_PREFIX		"fscrypt:"
 #define FSCRYPT_KEY_DESC_PREFIX_SIZE	8
-#define FSCRYPT_MAX_KEY_SIZE		64
+#define FSCRYPT_MAX_KEY_SIZE		88
 struct fscrypt_key {
 	__u32 mode;
 	__u8 raw[FSCRYPT_MAX_KEY_SIZE];
@@ -127,7 +127,10 @@ struct fscrypt_add_key_arg {
 	struct fscrypt_key_specifier key_spec;
 	__u32 raw_size;
 	__u32 key_id;
-	__u32 __reserved[8];
+	__u32 __reserved[7];
+	/* N.B.: "temporary" flag, not reserved upstream */
+#define __FSCRYPT_ADD_KEY_FLAG_HW_WRAPPED		0x00000001
+	__u32 __flags;
 	__u8 raw[];
 };
 
